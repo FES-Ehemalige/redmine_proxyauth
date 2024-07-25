@@ -1,0 +1,7 @@
+de:
+  proxyauth_client_id: Client-ID
+  proxyauth_client_id_info: Anwendungs-ID (Client)
+  proxyauth_client_secret: Geheime Zeichenfolge
+  proxyauth_client_secret_info: Anwendungskennwort
+  proxyauth_tenant_id: Mandant-ID
+  proxyauth_tenant_id_info: Verzeichnis-ID (Mandant)

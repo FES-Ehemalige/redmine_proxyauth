@@ -1,0 +1,7 @@
+cs:
+  proxyauth_client_id: ID klienta
+  proxyauth_client_id_info: ID aplikace (klienta)
+  proxyauth_client_secret: Tajný kód
+  proxyauth_client_secret_info: Heslo aplikace
+  proxyauth_tenant_id: ID tenanta
+  proxyauth_tenant_id_info: ID adresáře (tenanta)

@@ -1,0 +1,38 @@
+version: '3'
+
+services:
+  redmine:
+    image: redmine:latest
+    ports:
+      - 3000:3000
+    volumes:
+      - ./redmine/app:/usr/src/redmine/app
+      - ./redmine/files:/usr/src/redmine/files
+      - ./redmine/plugins:/usr/src/redmine/plugins
+    environment:
+      REDMINE_DB_MYSQL: mysql
+      REDMINE_DB_USERNAME: redmine
+      REDMINE_DB_PASSWORD: pass
+      REDMINE_SECRET_KEY_BASE: supersecretkey
+    depends_on:
+      - mysql
+
+  mysql:
+    image: mysql:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: pass
+      MYSQL_DATABASE: redmine
+      MYSQL_USER: redmine
+      MYSQL_PASSWORD: pass
+    volumes:
+      - db_data:/var/lib/mysql
+
+  adminer:
+    image: adminer:latest
+    ports:
+      - 8080:8080
+    depends_on:
+      - mysql
+
+volumes:
+  db_data:

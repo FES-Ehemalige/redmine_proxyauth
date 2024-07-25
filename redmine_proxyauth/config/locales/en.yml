@@ -1,0 +1,7 @@
+en:
+  proxyauth_client_id: Client ID
+  proxyauth_client_id_info: Application (client) ID
+  proxyauth_client_secret: Client secret
+  proxyauth_client_secret_info: Application password
+  proxyauth_tenant_id: Tenant ID / Realm
+  proxyauth_tenant_id_info: Directory (tenant) ID
