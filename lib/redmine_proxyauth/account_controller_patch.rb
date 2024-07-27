@@ -35,9 +35,6 @@ module RedmineProxyauth
         return
       end
 
-      Rails.logger.info user.registered?
-      Rails.logger.info user.active?
-
       if user.registered? # Registered
         account_pending user
       elsif user.active? # Active
