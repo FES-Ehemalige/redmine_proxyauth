@@ -15,44 +15,44 @@ module RedmineProxyauth
 
       email, given_name, family_name = "", "", ""
 
-      if request.headers['X-Auth-Request-Access-Token'].present?
-        token = request.headers['X-Auth-Request-Access-Token']
-        decoded_token = JWT.decode token, nil, false
-        given_name = decoded_token[0]["given_name"]
-        family_name = decoded_token[0]["family_name"]
-        email = decoded_token[0]["email"]
-
-        Rails.logger.info "Found token for: #{email} / #{given_name} #{family_name}"
-
-        user = User.find_by_mail(email)
-        if user.nil?
-          Rails.logger.error "User with email #{email} not found."
-          flash[:error] = l(:proxyauth_user_not_found, email: email)
-          return
-        end
-
-        if user.firstname != given_name || user.lastname != family_name
-          Rails.logger.error "User with email #{email} has changed name from #{user.firstname} #{user.lastname} to #{given_name} #{family_name}. Not logging in."
-          flash[:error] = l(:proxyauth_user_inconsistent)
-          return
-        end
-
-        Rails.logger.info user.registered?
-        Rails.logger.info user.active?
-
-        if user.registered? # Registered
-          account_pending user
-        elsif user.active? # Active
-          handle_active_user user
-          user.update_last_login_on!
-        else # Locked
-          handle_inactive_user user
-        end
+      if !request.headers['X-Auth-Request-Access-Token'].present?
+        flash[:error] = l(:proxyauth_missing_token)
+        super
         return
       end
 
-      flash[:error] = l(:proxyauth_missing_token)
-      super
+      token = request.headers['X-Auth-Request-Access-Token']
+      decoded_token = JWT.decode token, nil, false
+      given_name = decoded_token[0]["given_name"]
+      family_name = decoded_token[0]["family_name"]
+      email = decoded_token[0]["email"]
+
+      Rails.logger.info "Found token for: #{email} / #{given_name} #{family_name}"
+
+      user = User.find_by_mail(email)
+      if user.nil?
+        Rails.logger.error "User with email #{email} not found."
+        flash[:error] = l(:proxyauth_user_not_found, email: email)
+        return
+      end
+
+      if user.firstname != given_name || user.lastname != family_name
+        Rails.logger.error "User with email #{email} has changed name from #{user.firstname} #{user.lastname} to #{given_name} #{family_name}. Not logging in."
+        flash[:error] = l(:proxyauth_user_inconsistent)
+        return
+      end
+
+      Rails.logger.info user.registered?
+      Rails.logger.info user.active?
+
+      if user.registered? # Registered
+        account_pending user
+      elsif user.active? # Active
+        handle_active_user user
+        user.update_last_login_on!
+      else # Locked
+        handle_inactive_user user
+      end
     end
 
     def logout
