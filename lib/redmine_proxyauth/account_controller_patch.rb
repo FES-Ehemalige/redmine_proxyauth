@@ -2,13 +2,6 @@ module RedmineProxyauth
   module AccountControllerPatch
 
     def login
-      id_token = get_id_token
-      if !id_token
-        flash[:error] = l(:proxyauth_bad_idp)
-        super
-        return
-      end
-
       if User.current.logged?
         redirect_back_or_default home_url, :referer => true
       end
@@ -59,46 +52,9 @@ module RedmineProxyauth
       if User.current.anonymous?
         redirect_to home_url
       elsif request.post?
-        id_token = get_id_token
-
-        redirect_url = "/oauth2/sign_out"
-        redirect_url += "?rd=" + CGI.escape(
-          "#{Setting.plugin_redmine_proxyauth[:tenant_uri]}/realms/#{Setting.plugin_redmine_proxyauth[:tenant_id]}/protocol/openid-connect/logout"
-        )
-
-        if !id_token
-          Rails.logger.error "Could not connect to IDP - Full logout not possible."
-        else
-          redirect_url += CGI.escape("?id_token_hint=#{id_token}&post_logout_redirect_uri=#{home_url}")
-        end
-
         logout_user
-        redirect_to redirect_url
+        redirect_to "/oauth2/sign_out?rd=#{CGI.escape(home_url)}"
       end
-    end
-
-    def get_id_token
-      tenant_uri = Setting.plugin_redmine_proxyauth[:tenant_uri]
-      if tenant_uri.nil? || tenant_uri.blank?
-        return ""
-      end
-
-      begin
-        resp = Net::HTTP.post_form(
-          URI("#{Setting.plugin_redmine_proxyauth[:tenant_uri]}/realms/#{Setting.plugin_redmine_proxyauth[:tenant_id]}/protocol/openid-connect/token"),
-          {
-            "client_id" => Setting.plugin_redmine_proxyauth[:client_id],
-            "client_secret" => Setting.plugin_redmine_proxyauth[:client_secret],
-            "grant_type" => "client_credentials",
-            "scope" => "openid"
-          }
-        )
-        body = JSON.parse(resp.body)
-        id_token = body["id_token"]
-      rescue SocketError => e
-        Rails.logger.warn "Could not connect to IDP: #{e}"
-      end
-      id_token
     end
 
   end

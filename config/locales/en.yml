@@ -7,7 +7,6 @@ en:
   proxyauth_client_secret_info: Application password
   proxyauth_tenant_id: Tenant ID / Realm
   proxyauth_tenant_id_info: Directory (tenant) ID
-  proxyauth_bad_idp: Could not connect to IDP - Automated login not possible.
   proxyauth_missing_token: No Authentication-Token found - Automated login not possible.
   proxyauth_user_not_found: "User with email %{email} not found. Please contact the administrator."
   proxyauth_user_inconsistent: "User information has changed. Please contact the administrator."

@@ -7,7 +7,6 @@ cs:
   proxyauth_client_secret_info: Heslo aplikace
   proxyauth_tenant_id: ID tenanta
   proxyauth_tenant_id_info: ID adresáře (tenanta)
-  proxyauth_bad_idp: Nelze se připojit k IDP - automatické přihlášení není možné.
   proxyauth_missing_token: Authentication-Token nebyl nalezen - automatizované přihlášení není možné.
   proxyauth_user_not_found: "Uživatel s e-mailem %{email} nebyl nalezen. Kontaktujte prosím správce."
   proxyauth_user_inconsistent: "Informace o uživateli se změnily. Kontaktujte prosím správce."
