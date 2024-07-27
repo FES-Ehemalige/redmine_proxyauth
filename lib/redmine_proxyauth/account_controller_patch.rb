@@ -4,7 +4,7 @@ module RedmineProxyauth
     def login
       id_token = get_id_token
       if !id_token
-        flash[:error] = l(:proxyauth_missing_token)
+        flash[:error] = l(:proxyauth_bad_idp)
         super
         return
       end
@@ -48,8 +48,11 @@ module RedmineProxyauth
         else # Locked
           handle_inactive_user user
         end
-
+        return
       end
+
+      flash[:error] = l(:proxyauth_missing_token)
+      super
     end
 
     def logout
@@ -75,6 +78,11 @@ module RedmineProxyauth
     end
 
     def get_id_token
+      tenant_uri = Setting.plugin_redmine_proxyauth[:tenant_uri]
+      if tenant_uri.nil? || tenant_uri.blank?
+        return ""
+      end
+
       begin
         resp = Net::HTTP.post_form(
           URI("#{Setting.plugin_redmine_proxyauth[:tenant_uri]}/realms/#{Setting.plugin_redmine_proxyauth[:tenant_id]}/protocol/openid-connect/token"),

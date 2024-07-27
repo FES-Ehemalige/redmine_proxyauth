@@ -7,6 +7,7 @@ de:
   proxyauth_client_secret_info: Anwendungskennwort
   proxyauth_tenant_id: Mandant-ID
   proxyauth_tenant_id_info: Verzeichnis-ID (Mandant)
-  proxyauth_missing_token: Konnte keine Verbindung zum IDP herstellen - Automatische Anmeldung nicht möglich.
+  proxyauth_bad_idp: Konnte keine Verbindung zum IDP herstellen - Automatische Anmeldung nicht möglich.
+  proxyauth_missing_token: Kein Authentifizierungs-Token gefunden - Automatischer Login nicht möglich.
   proxyauth_user_not_found: "Benutzer mit E-Mail %{email} nicht gefunden. Bitte kontaktieren Sie den Administrator."
   proxyauth_user_inconsistent: "Die Benutzerinformationen haben sich geändert. Bitte kontaktieren Sie den Administrator."
