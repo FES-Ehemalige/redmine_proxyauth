@@ -27,7 +27,7 @@ module RedmineProxyauth
         user = User.find_by_mail(email)
         if user.nil?
           Rails.logger.error "User with email #{email} not found."
-          flash[:error] = l(:proxyauth_user_not_found)
+          flash[:error] = l(:proxyauth_user_not_found, email: email)
           return
         end
 
@@ -60,13 +60,13 @@ module RedmineProxyauth
 
         redirect_url = "/oauth2/sign_out"
         redirect_url += "?rd=" + CGI.escape(
-          "https://idp.example.com/auth/realms/#{Setting.plugin_redmine_proxyauth[:tenant_id]}/protocol/openid-connect/logout"
+          "#{Setting.plugin_redmine_proxyauth[:tenant_uri]}/realms/#{Setting.plugin_redmine_proxyauth[:tenant_id]}/protocol/openid-connect/logout"
         )
 
         if !id_token
           Rails.logger.error "Could not connect to IDP - Full logout not possible."
         else
-          redirect_url += CGI.escape("?id_token_hint=#{id_token}&post_logout_redirect_uri=https://example.com/")
+          redirect_url += CGI.escape("?id_token_hint=#{id_token}&post_logout_redirect_uri=#{home_url}")
         end
 
         logout_user
@@ -77,7 +77,7 @@ module RedmineProxyauth
     def get_id_token
       begin
         resp = Net::HTTP.post_form(
-          URI("https://idp.example.com/auth/realms/#{Setting.plugin_redmine_proxyauth[:tenant_id]}/protocol/openid-connect/token"),
+          URI("#{Setting.plugin_redmine_proxyauth[:tenant_uri]}/realms/#{Setting.plugin_redmine_proxyauth[:tenant_id]}/protocol/openid-connect/token"),
           {
             "client_id" => Setting.plugin_redmine_proxyauth[:client_id],
             "client_secret" => Setting.plugin_redmine_proxyauth[:client_secret],

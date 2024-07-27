@@ -1,4 +1,6 @@
 cs:
+  proxyauth_uri: IDP URL
+  proxyauth_uri_info: Adresa URL poskytovatele identit
   proxyauth_client_id: ID klienta
   proxyauth_client_id_info: ID aplikace (klienta)
   proxyauth_client_secret: Tajný kód

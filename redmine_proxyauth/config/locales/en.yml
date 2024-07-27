@@ -1,4 +1,6 @@
 en:
+  proxyauth_uri: IDP URL
+  proxyauth_uri_info: URL of the Identity Provider
   proxyauth_client_id: Client ID
   proxyauth_client_id_info: Application (client) ID
   proxyauth_client_secret: Client secret

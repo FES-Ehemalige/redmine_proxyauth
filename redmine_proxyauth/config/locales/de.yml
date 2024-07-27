@@ -1,4 +1,6 @@
 de:
+  proxyauth_uri: IDP URL
+  proxyauth_uri_info: URL des Identitätsanbieters
   proxyauth_client_id: Client-ID
   proxyauth_client_id_info: Anwendungs-ID (Client)
   proxyauth_client_secret: Geheime Zeichenfolge

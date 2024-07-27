@@ -16,6 +16,7 @@ Redmine::Plugin.register :redmine_proxyauth do
   requires_redmine version_or_higher: '5.1.0'
 
   settings default: {
+    tenant_uri: '',
     client_id: '',
     client_secret: '',
     tenant_id: '',
