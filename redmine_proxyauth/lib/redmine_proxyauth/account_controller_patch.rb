@@ -4,7 +4,7 @@ module RedmineProxyauth
     def login
       id_token = get_id_token
       if !id_token
-        flash[:error] = "Could not connect to IDP - Automated login not possible."
+        flash[:error] = l(:proxyauth_missing_token)
         super
         return
       end
@@ -27,13 +27,13 @@ module RedmineProxyauth
         user = User.find_by_mail(email)
         if user.nil?
           Rails.logger.error "User with email #{email} not found."
-          flash[:error] = "User with email #{email} not found. Please contact the administrator."
+          flash[:error] = l(:proxyauth_user_not_found)
           return
         end
 
         if user.firstname != given_name || user.lastname != family_name
           Rails.logger.error "User with email #{email} has changed name from #{user.firstname} #{user.lastname} to #{given_name} #{family_name}. Not logging in."
-          flash[:error] = "User information has changed. Please contact the administrator."
+          flash[:error] = l(:proxyauth_user_inconsistent)
           return
         end
 

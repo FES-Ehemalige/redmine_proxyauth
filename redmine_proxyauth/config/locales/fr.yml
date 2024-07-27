@@ -5,3 +5,6 @@ fr:
   proxyauth_client_secret_info: Mot de passe d'application
   proxyauth_tenant_id: ID de Tenant / Realm
   proxyauth_tenant_id_info: ID de répertoire (tenant)
+  proxyauth_missing_token: Impossible de se connecter à l'IDP - La connexion automatisée n'est pas possible.
+  proxyauth_user_not_found: "L'utilisateur dont l'adresse électronique est %{email} n'a pas été trouvé. Veuillez contacter l'administrateur."
+  proxyauth_user_inconsistent: "Les informations relatives à l'utilisateur ont changé. Veuillez contacter l'administrateur."
