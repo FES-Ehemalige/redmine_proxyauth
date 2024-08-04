@@ -10,3 +10,4 @@ fr:
   proxyauth_missing_token: Aucun jeton d'authentification n'a été trouvé - La connexion automatisée n'est pas possible.
   proxyauth_user_not_found: "L'utilisateur dont l'adresse électronique est %{email} n'a pas été trouvé. Veuillez contacter l'administrateur."
   proxyauth_user_inconsistent: "Les informations relatives à l'utilisateur ont changé. Veuillez contacter l'administrateur."
+  login_disabled: "Ce Redmine utilise une connexion automatique. Si vous voyez ce message, c'est que vous n'avez pas pu vous connecter. Veuillez contacter l'administrateur."

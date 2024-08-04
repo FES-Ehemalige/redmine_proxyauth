@@ -10,3 +10,4 @@ en:
   proxyauth_missing_token: No Authentication-Token found - Automated login not possible.
   proxyauth_user_not_found: "User with email %{email} not found. Please contact the administrator."
   proxyauth_user_inconsistent: "User information has changed. Please contact the administrator."
+  login_disabled: "This Redmine uses automated login. When you see this message, you could not be logged in. Please contact the administrator."

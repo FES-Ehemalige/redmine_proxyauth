@@ -2,15 +2,20 @@ module RedmineProxyauth
   module AccountControllerPatch
 
     def login
+      if params.key?("form_login") || request.post?
+        super
+        return
+      end
+
       if User.current.logged?
         redirect_back_or_default home_url, :referer => true
+        return
       end
 
       email, given_name, family_name = "", "", ""
 
       if !request.headers['X-Auth-Request-Access-Token'].present?
         flash[:error] = l(:proxyauth_missing_token)
-        super
         return
       end
 

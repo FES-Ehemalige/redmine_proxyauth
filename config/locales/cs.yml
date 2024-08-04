@@ -10,3 +10,4 @@ cs:
   proxyauth_missing_token: Authentication-Token nebyl nalezen - automatizované přihlášení není možné.
   proxyauth_user_not_found: "Uživatel s e-mailem %{email} nebyl nalezen. Kontaktujte prosím správce."
   proxyauth_user_inconsistent: "Informace o uživateli se změnily. Kontaktujte prosím správce."
+  login_disabled: "Tento Redmine používá automatické přihlášení. Když se zobrazí tato zpráva, nemohli jste být přihlášeni. Obraťte se prosím na správce."
